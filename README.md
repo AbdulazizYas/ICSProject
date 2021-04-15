@@ -8,3 +8,6 @@ ICS 108 Project
 
 #### Created CreateScene & CreatePane classes and added getQuestion method in SelectionPane class, also added functionality to create id to each question object 
 2021, April 16 (Abdulaziz)
+
+#### Created ViewScene, ViewPane, DeleteScene and DeletePane basic structure 
+2021, April 16 (Yousuf)
