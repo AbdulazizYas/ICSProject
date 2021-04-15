@@ -30,6 +30,11 @@ class ViewPane extends BasePane{
 	
 	public ViewPane(ArrayList<Question> qstList, Button back) {
 			
+		
+		
+		
+		
+		
 		this.back = back;
 		
 		this.question = new Label();
