@@ -18,11 +18,9 @@ public abstract class BasePane extends BorderPane {
 class SelectionPane extends BasePane{
 	
 	private ComboBox<String> qsCoList;
-	
 	private Label selectLbl;
-	
 	private String[] qsArr;
-	
+	private ArrayList<Question> qsList;
 	private ObservableList<String> qsObList;
 	
 	public SelectionPane(ArrayList<Question> qsList){
@@ -30,18 +28,20 @@ class SelectionPane extends BasePane{
 		this.qsCoList = new ComboBox<String>();
 		
 		this.selectLbl = new Label("Select");
+
+		this.qsList = qsList;
 		
 		this.qsArr = new String[qsList.size()];
 		
 		// filling the array of question text for each question object
 		for(int i = 0; i < qsArr.length; i++) {
-			qsArr[i] = qsList.get(i).getQuestionText();
+			qsArr[i] = qsList.get(i).getID() +" - "+ qsList.get(i).getQuestionText();
 		}
 		
 		this.qsObList = FXCollections.observableArrayList(qsArr);
-		
 		//Build the layout
 		buildLayout();
+		
 	}
 
 	@Override
@@ -60,9 +60,15 @@ class SelectionPane extends BasePane{
 		
 		this.qsCoList.setPrefWidth(hb.getPrefWidth() - 100);
 		
-		
 		this.setCenter(hb);
 		
+	}
+	
+	public Question getQuestion() {
+		String questionInCB = this.qsCoList.getValue();
+		
+		String[] tempArr = questionInCB.split(" ");
+		return this.qsList.get(Integer.parseInt(tempArr[0])-1);
 	}
 	
 }
