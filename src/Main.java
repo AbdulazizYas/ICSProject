@@ -23,12 +23,17 @@ public class Main extends Application{
 		
 		BorderPane bb = new BorderPane();
 		Button create = new Button("Create");
+		Button edit = new Button("Edit");
 		create.setOnAction(e -> {
 			stage.setScene(new CreateScene(qs,back));
 		});
+		edit.setOnAction(e -> {
+			stage.setScene(new EditScene(qs,back));
+		});
 		
 		bb.setCenter(create);
-		 s = new Scene(bb,400,400);
+		bb.setRight(edit);
+		s = new Scene(bb,400,400);
 		stage.setScene(s);
 		stage.show();
 		

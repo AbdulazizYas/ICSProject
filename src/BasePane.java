@@ -63,12 +63,18 @@ class SelectionPane extends BasePane{
 		this.setCenter(hb);
 		
 	}
-	
+	public ComboBox<String> getCombo(){
+		return this.qsCoList;
+	}
 	public Question getQuestion() {
+		
 		String questionInCB = this.qsCoList.getValue();
 		
+		if(questionInCB == "-- Select a Question --") return null;
+		
 		String[] tempArr = questionInCB.split(" ");
-		return this.qsList.get(Integer.parseInt(tempArr[0])-1);
+		
+		return this.qsList.get(Integer.parseInt(tempArr[0]) - 1);
 	}
 	
 }
