@@ -21,3 +21,7 @@ ICS 108 Project
 
 #### Edited FormPane and SelectionPane, fix bug that will fire if you update question that is only child of combo box, handle updating or creating a question that has at least one field empty,edited the main scene
 2021, April 19 (Abdulaziz)
+
+
+#### Designed the main scene
+2021, April 19 (Abdulaziz)
