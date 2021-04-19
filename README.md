@@ -17,3 +17,7 @@ ICS 108 Project
 
 #### Created and structured FormPane class to be instanced in CreatePane & EditPane, also edited the functionalty of choosing question in EditPane, also there was a bug of clicking update button in EditPane when there is no question has been selected, this bug was fixed and remaining warning user to select question
 2021, April 17 (Abdulaziz)
+
+
+#### Edited FormPane and SelectionPane, fix bug that will fire if you update question that is only child of combo box, handle updating or creating a question that has at least one field empty,edited the main scene
+2021, April 19 (Abdulaziz)

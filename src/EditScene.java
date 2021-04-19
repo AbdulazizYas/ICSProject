@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 public class EditScene extends Scene{
 
 	private EditScene(Pane pane) {
-		super(pane);
+		super(pane,700,500);
 	}
 	public EditScene(ArrayList<Question> qstList, Button back) {
 		this(new EditPane(qstList,back));
@@ -45,8 +45,15 @@ class EditPane extends BasePane{
 		
 		this.update.setOnAction(e -> {
 			
+			
 			// if question object is null, then the question has not been selected
 			if(this.question == null) return;
+			
+			//check if one field at least not empty
+			if(this.form.isFieldsEmpty()) {
+				
+				return;
+			}
 			
 			//get the index of question object 
 			int index = qstList.indexOf(this.question);

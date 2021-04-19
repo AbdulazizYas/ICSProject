@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -13,7 +14,7 @@ import javafx.scene.layout.VBox;
 public class CreateScene extends Scene{
 
 	private CreateScene(Pane pane) {
-		super(pane);
+		super(pane,700,500);
 	}
 	
 	public CreateScene(ArrayList<Question> qstList, Button back) {
@@ -34,6 +35,11 @@ class CreatePane extends BasePane{
 		
 		this.create.setOnAction(e -> {
 			
+			if(this.form.isFieldsEmpty()) {
+				
+				return;
+			}
+			
 			Question q = new Question(
 					this.form.getQuestionTextField().getText(),
 					this.form.getCorrectAnsField().getText(),
@@ -43,6 +49,13 @@ class CreatePane extends BasePane{
 					);
 			qstList.add(q);
 			
+			this.form.getQuestionTextField().setText("");
+			this.form.getCorrectAnsField().setText("");
+			this.form.getAnsOneField().setText("");
+			this.form.getAnsTwoField().setText("");
+			this.form.getAnsThreeField().setText("");
+			
+			
 		});
 		
 		buildLayout();
@@ -50,9 +63,14 @@ class CreatePane extends BasePane{
 
 	@Override
 	protected void buildLayout() {
+		Label title = new Label("Create your question");
+
 		this.setPadding(new Insets(25));
+		this.setTop(title);
 		this.setCenter(this.form);
 		
 	}
+	
+	
 	
 }

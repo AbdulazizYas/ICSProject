@@ -49,18 +49,13 @@ class SelectionPane extends BasePane{
 		
 		this.qsCoList.getItems().addAll(qsObList);
 		this.qsCoList.setValue("-- Select a Question --");
+
 		
 		
-		HBox hb = new HBox(15);
-		hb.setPadding(new Insets(35,20,35,20));
-		hb.getChildren().addAll(this.selectLbl, this.qsCoList);
-		hb.setAlignment(Pos.CENTER);
-		hb.setPrefWidth(400);
-		
-		
-		this.qsCoList.setPrefWidth(hb.getPrefWidth() - 100);
-		
-		this.setCenter(hb);
+		this.qsCoList.setPrefWidth(Double.MAX_VALUE);
+		this.qsCoList.setStyle("-fx-alignment: center; -fx-text-alignment: center");
+
+		this.setCenter(this.qsCoList);
 		
 	}
 	public ComboBox<String> getCombo(){
@@ -68,13 +63,18 @@ class SelectionPane extends BasePane{
 	}
 	public Question getQuestion() {
 		
-		String questionInCB = this.qsCoList.getValue();
+		String questionInCB = this.qsCoList.getSelectionModel().getSelectedItem();
 		
 		if(questionInCB == "-- Select a Question --") return null;
 		
-		String[] tempArr = questionInCB.split(" ");
-		
-		return this.qsList.get(Integer.parseInt(tempArr[0]) - 1);
+		if(questionInCB != null) {
+			//get the index from the numbers in each item in combo box
+			int index = Integer.parseInt(questionInCB.split(" ")[0]) - 1;
+			return this.qsList.get(index);
+		}
+			
+		//if questionInCB == null, then return the first question
+		return this.qsList.get(0);
 	}
 	
 }

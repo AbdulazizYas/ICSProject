@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 
 public class FormPane extends BasePane{
@@ -16,6 +18,7 @@ public class FormPane extends BasePane{
 	private TextField ansOneField;
 	private TextField ansTwoField;
 	private TextField ansThreeField;
+
 	
 	public FormPane(Button back, Button post) {
 		this.back = back;
@@ -32,38 +35,26 @@ public class FormPane extends BasePane{
 	@Override
 	protected void buildLayout() {
 		
-		GridPane gridPane = new GridPane();
+		this.questionTextField.setPromptText("Type here your question ...");
+		this.correctAnsField.setPromptText("Type here the correct answer ...");
+		this.ansOneField.setPromptText("Type here answer 1 ..");
+		this.ansTwoField.setPromptText("Type here answer 2 ..");
+		this.ansThreeField.setPromptText("Type here answer 3 ..");
 		
-        gridPane.add(new Label("Question Text: "), 0, 0);
-        gridPane.add(this.questionTextField, 1, 0);
-        
-        gridPane.add(new Label("Correct Answer: "), 0, 1);
-        gridPane.add(this.correctAnsField, 1, 1);
-        
-        Label incorrects = new Label("Incorrect Answers");
-        incorrects.setAlignment(Pos.CENTER);
-        gridPane.add(incorrects, 0, 2);
-        
-        gridPane.add(new Label("First Answer: "), 0, 3);
-        gridPane.add(this.ansOneField, 1, 3);
-        
-        gridPane.add(new Label("Second Answer: "), 0, 4);
-        gridPane.add(this.ansTwoField, 1, 4);
-        
-        gridPane.add(new Label("Third Answer: "), 0, 5);
-        gridPane.add(this.ansThreeField, 1, 5);
-        
-        gridPane.setVgap(15);
-        gridPane.setHgap(15);
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(20));
+		this.questionTextField.setPrefHeight(80);
+		this.questionTextField.setAlignment(Pos.CENTER);
+		
+		VBox fields = new VBox(15);
+		fields.setAlignment(Pos.CENTER);
+		fields.setPadding(new Insets(20));
+		fields.getChildren().addAll(this.questionTextField,this.correctAnsField,this.ansOneField,this.ansTwoField,this.ansThreeField);
 		
 		BorderPane buttonsPane = new BorderPane();
 		
 		buttonsPane.setRight(this.post);
 		buttonsPane.setLeft(this.back);
 		
-		this.setCenter(gridPane);
+		this.setCenter(fields);
 		this.setBottom(buttonsPane);
 		
 	}
@@ -81,5 +72,19 @@ public class FormPane extends BasePane{
 	}
 	public TextField getAnsThreeField() {
 		return ansThreeField;
+	}
+	
+	
+	public boolean isFieldsEmpty() {
+		//if at least one field is empty ...
+		
+		if( this.questionTextField.getText().length() == 0 ||
+			this.correctAnsField.getText().length() == 0 ||
+			this.ansOneField.getText().length() == 0 ||
+			this.ansTwoField.getText().length() == 0 ||
+			this.ansThreeField.getText().length() == 0) return true; // then return true
+		
+		//otherwise return false
+		return false;
 	}
 }
