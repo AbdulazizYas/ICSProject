@@ -79,9 +79,11 @@ public class Main extends Application{
 		buildLayout();
 
 
-		main = new Scene(pane,700,500);
-	
+		main = new Scene(pane,900,500);
+		
 		stage.setScene(main);
+		
+		ResizeHelper.addResizeListener(this.stage);
 		stage.setMinHeight(500);
 		stage.setMinWidth(700);
 		stage.setTitle("Questioner");
@@ -194,7 +196,10 @@ public class Main extends Application{
 		pane.setCenter(content);
 	}
 
-
+	@Override
+	public void stop() {
+		System.out.print(true);
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

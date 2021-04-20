@@ -29,3 +29,7 @@ ICS 108 Project
 
 #### Customized the topBar by creating TopBarPane class, created Constants class to save constants, edited a little more on main scene design
 2021, April 20 (Abdulaziz)
+
+
+#### Added ResizeHelper class to implement the resizing feature into UNDECORATED stage
+2021, April 20 (Abdulaziz)
