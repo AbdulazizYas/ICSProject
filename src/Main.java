@@ -14,6 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application{
 	
@@ -28,16 +29,14 @@ public class Main extends Application{
 	private Label choose;
 	private Label copyright;
 	private ArrayList<Question> qsList;
-	private HBox pane;
+	private BorderPane pane;
+	private HBox content;
+	private TopBarPane topBar;
 	private GridPane buttons;
 	private BorderPane welcomePane;
 	private BorderPane allRightSide;
 	private Background[] Bgs;
-	public static final String primaryColor = "#0C6980";
-	public static final String secondaryColor = "#C4DBE0";
-	public static final String accentColor = "#00A8A8";
-	public static final String btn = "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.20) , 2, 0.0 , 0 , 2 );"
-									+ "-fx-cursor: hand;";
+	
 	
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -58,9 +57,11 @@ public class Main extends Application{
 		copyright = new Label("Questioner © Developed by Abdulaziz & Yousef");
 		
 		welcomePane = new BorderPane();
-		pane = new HBox();
+		pane = new BorderPane();
 		buttons = new GridPane();
 		allRightSide = new BorderPane();
+		topBar = new TopBarPane(stage,"Home");
+		content = new HBox();
 		
 		Bgs = getBGs();
 		
@@ -73,22 +74,19 @@ public class Main extends Application{
 		/*-----------  Designing  ---------------*/
 		designLayout();
 		
-		
-		
-		
+	
 		/*===========  Layouting =============*/
 		buildLayout();
 
-		
-		
 
 		main = new Scene(pane,700,500);
+	
 		stage.setScene(main);
 		stage.setMinHeight(500);
 		stage.setMinWidth(700);
-		stage.show();
-		
-		
+		stage.setTitle("Questioner");
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.show();		
 
 		
 		
@@ -96,7 +94,7 @@ public class Main extends Application{
 	
 	public Background[] getBGs() {
 		BackgroundFill bg1 = new BackgroundFill(
-				Color.valueOf(primaryColor),
+				Color.valueOf(Constants.primaryColor),
                 new CornerRadii(0),
                 new Insets(0)
 				);
@@ -106,7 +104,7 @@ public class Main extends Application{
                 new Insets(0)
 				);
 		BackgroundFill bg3 = new BackgroundFill(
-				Color.valueOf(accentColor),
+				Color.valueOf(Constants.accentColor),
                 new CornerRadii(10),
                 new Insets(0)
 				);
@@ -123,13 +121,13 @@ public class Main extends Application{
 		choose.setAlignment(Pos.CENTER);
 		choose.setTextFill(Color.valueOf("#FFF"));
 		choose.setPadding(new Insets(10,5,10,5));
-		choose.setStyle("-fx-background-color: " + primaryColor + "; -fx-background-radius: 50;"
+		choose.setStyle("-fx-background-color: " + Constants.primaryColor + "; -fx-background-radius: 50;"
 						+ "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.25) , 5, 0.0 , 0 , 1 );");
 		
 		copyright.setAlignment(Pos.CENTER);
 		
 		//welcomePane.setBackground(Bgs[0]);
-		welcomePane.setStyle("-fx-background-color: linear-gradient(to top right,"+primaryColor+ " 25%, "+primaryColor+"aa 75%);");
+		welcomePane.setStyle("-fx-background-color: linear-gradient(to top,"+Constants.primaryColor+ " 25%, "+Constants.primaryColor+"aa 75%);");
 		
 		allRightSide.setBackground(Bgs[1]);
 		allRightSide.setStyle("-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.25) , 5, 0.0 , 2 , 0 );");
@@ -139,10 +137,10 @@ public class Main extends Application{
 		delete.setFont(Font.font(34));
 		edit.setFont(Font.font(34));
 		
-		create.setStyle(btn);
-		view.setStyle(btn);
-		delete.setStyle(btn);
-		edit.setStyle(btn);
+		create.setStyle(Constants.btn);
+		view.setStyle(Constants.btn);
+		delete.setStyle(Constants.btn);
+		edit.setStyle(Constants.btn);
 		
 		create.setBackground(Bgs[2]);
 		view.setBackground(Bgs[2]);
@@ -156,7 +154,8 @@ public class Main extends Application{
 	}
 	
 	public void buildLayout() {
-	 
+		
+		
 		buttons.add(create, 0, 0,2,1);
 		buttons.add(edit, 0, 1);
 		buttons.add(delete, 1, 1);
@@ -188,10 +187,14 @@ public class Main extends Application{
 		
 		welcomePane.setCenter(welcome);
 		
-		pane.getChildren().addAll(welcomePane,allRightSide);
-		pane.setAlignment(Pos.CENTER);
+		content.getChildren().addAll(welcomePane,allRightSide);
+		content.setAlignment(Pos.CENTER);
+		
+		pane.setTop(topBar);
+		pane.setCenter(content);
 	}
-	
+
+
 	public static void main(String[] args) {
 		launch(args);
 	}
