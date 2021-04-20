@@ -3,17 +3,32 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 
-public abstract class BasePane extends BorderPane {
+public abstract class BaseScene extends Scene {
+	
+	protected final BorderPane root = (BorderPane) getRoot();
+	public BaseScene() {
+		super(new BorderPane(),900,500);
+		
+	}
+
+	protected abstract void buildLayout();
+
+}
+
+abstract class BasePane extends BorderPane {
 	
 	protected abstract void buildLayout();
 
 }
+
 
 class SelectionPane extends BasePane{
 	

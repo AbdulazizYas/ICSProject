@@ -5,26 +5,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 
-public class EditScene extends Scene{
+public class EditScene extends BaseScene{
 
-	private EditScene(Pane pane) {
-		super(pane,700,500);
-	}
-	public EditScene(ArrayList<Question> qstList, Button back) {
-		this(new EditPane(qstList,back));
-	}
-
-}
-
-class EditPane extends BasePane{
-	
 	private SelectionPane selectPane;
 	private FormPane form;
 	private Button update;
 	private Question question;
 	
-	
-	public EditPane(ArrayList<Question> qstList, Button back) {
+	public EditScene(ArrayList<Question> qstList, Button back) {
 		this.selectPane = new SelectionPane(qstList);
 		this.update = new Button("Update");
 		this.form = new FormPane(back,this.update);
@@ -89,13 +77,10 @@ class EditPane extends BasePane{
 
 	@Override
 	protected void buildLayout() {
-
-		this.setPadding(new Insets(25));
-		this.setTop(this.selectPane);
-		this.setCenter(this.form);
-
+		this.root.setPadding(new Insets(25));
+		this.root.setTop(this.selectPane);
+		this.root.setCenter(this.form);
 		
 	}
-	
-}
 
+}

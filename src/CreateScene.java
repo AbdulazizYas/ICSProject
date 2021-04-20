@@ -11,24 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
-public class CreateScene extends Scene{
-
-	private CreateScene(Pane pane) {
-		super(pane,700,500);
-	}
-	
-	public CreateScene(ArrayList<Question> qstList, Button back) {
-		this(new CreatePane(qstList,back));
-	}
-
-}
-
-class CreatePane extends BasePane{
+public class CreateScene extends BaseScene{
 
 	private Button create;
 	private FormPane form;
 	
-	public CreatePane(ArrayList<Question> qstList, Button back) {
+	public CreateScene(ArrayList<Question> qstList, Button back) {
 		
 		this.create = new Button("Create");
 		this.form = new FormPane(back,this.create);
@@ -57,20 +45,16 @@ class CreatePane extends BasePane{
 			
 			
 		});
-		
 		buildLayout();
 	}
-
-	@Override
+	//@Override
 	protected void buildLayout() {
 		Label title = new Label("Create your question");
 
-		this.setPadding(new Insets(25));
-		this.setTop(title);
-		this.setCenter(this.form);
+		this.root.setPadding(new Insets(25));
+		this.root.setTop(title);
+		this.root.setCenter(this.form);
 		
 	}
-	
-	
-	
+
 }

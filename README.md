@@ -33,3 +33,7 @@ ICS 108 Project
 
 #### Added ResizeHelper class to implement the resizing feature into UNDECORATED stage
 2021, April 20 (Abdulaziz)
+
+
+#### Deleted CreatePane,EditPane,DeletePane,ViewPane and created BaseScene abstract class
+2021, April 20 (Abdulaziz)
