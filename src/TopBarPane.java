@@ -18,11 +18,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-public class TopBarPane extends BasePane{
+public class TopBarPane extends BorderPane implements BasePane{
 	
 	private Stage stage;
-	private double xOff = 0;
-	private double yOff = 0;
 	private Label title ;
 	private Label X = new Label("X");
 	private Label maximize = new Label("\u25A0");
@@ -32,11 +30,11 @@ public class TopBarPane extends BasePane{
 		this.stage = stage;
 		this.title = new Label("Questioner || "+title);
 	
-		buildLayout();
+		buildPane();
 	}
 	
 	@Override
-	protected void buildLayout() {
+	public void buildPane() {
 		HBox buttons = new HBox(10);
 		X.setFont(Font.font("Calbiri", 16));
 		maximize.setFont(Font.font("Calbiri", 16));
@@ -47,18 +45,18 @@ public class TopBarPane extends BasePane{
 		minimize.setPadding(new Insets(5,20,5,20));
 		
 		
-		X.setStyle(Constants.cursor);
-		maximize.setStyle(Constants.cursor);
-		minimize.setStyle(Constants.cursor);
+		X.setStyle(Commons.cursor);
+		maximize.setStyle(Commons.cursor);
+		minimize.setStyle(Commons.cursor);
 		
-		X.setOnMouseEntered(e -> X.setStyle(Constants.cursor+ "-fx-background-color:#DF362D"));
-		X.setOnMouseExited(e -> X.setStyle(Constants.cursor+"-fx-background-color: transparent"));
+		X.setOnMouseEntered(e -> X.setStyle(Commons.cursor+ "-fx-background-color:#DF362D"));
+		X.setOnMouseExited(e -> X.setStyle(Commons.cursor+"-fx-background-color: transparent"));
 		
-		maximize.setOnMouseEntered(e -> maximize.setStyle(Constants.cursor+ Constants.bgPrimary+"55"));
-		maximize.setOnMouseExited(e -> maximize.setStyle(Constants.cursor+"-fx-background-color: transparent"));
+		maximize.setOnMouseEntered(e -> maximize.setStyle(Commons.cursor+ Commons.bgPrimary+"55"));
+		maximize.setOnMouseExited(e -> maximize.setStyle(Commons.cursor+"-fx-background-color: transparent"));
 		
-		minimize.setOnMouseEntered(e -> minimize.setStyle(Constants.cursor+ Constants.bgPrimary+"55"));
-		minimize.setOnMouseExited(e -> minimize.setStyle(Constants.cursor+"-fx-background-color: transparent"));
+		minimize.setOnMouseEntered(e -> minimize.setStyle(Commons.cursor+ Commons.bgPrimary+"55"));
+		minimize.setOnMouseExited(e -> minimize.setStyle(Commons.cursor+"-fx-background-color: transparent"));
 		
 		
 		X.setOnMouseClicked(e -> Platform.exit());
@@ -74,7 +72,7 @@ public class TopBarPane extends BasePane{
 		
 		this.prefWidthProperty().bind(stage.widthProperty());
 		this.setPrefHeight(32);
-		this.setStyle(Constants.bgPrimary+"aa");
+		this.setStyle(Commons.bgPrimary+"aa");
 		this.setRight(buttons);
 		this.setLeft(this.title);
 		
@@ -85,18 +83,6 @@ public class TopBarPane extends BasePane{
 		
 		buttons.getChildren().addAll(minimize,maximize,X);
 	
-		this.setOnMousePressed(e -> {
-			xOff = e.getSceneX();
-			yOff = e.getSceneY();
-		});
-		this.setOnMouseDragged(e -> {
-			if(stage.isMaximized()) stage.setMaximized(false);
-			stage.setX(e.getScreenX() - xOff);
-			stage.setY(e.getScreenY() - yOff);
-		});
-		
-		//for add resizing feature
-		
 		
 	}
 

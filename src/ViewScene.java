@@ -25,10 +25,11 @@ public class ViewScene extends BaseScene{
 		this.ansOne = new Label();
 		this.ansTwo = new Label();
 		this.ansThree = new Label();
+		
 	}
 
 	@Override
-	protected void buildLayout() {
+	protected void build() {
 		// TODO Auto-generated method stub
 		
 	}

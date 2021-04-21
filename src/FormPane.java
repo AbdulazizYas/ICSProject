@@ -9,9 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 
-public class FormPane extends BasePane{
+public class FormPane extends BorderPane implements BasePane{
 	
-	private Button back;
+	public  Button back;
 	private Button post;
 	private TextField questionTextField;
 	private TextField correctAnsField;
@@ -20,7 +20,7 @@ public class FormPane extends BasePane{
 	private TextField ansThreeField;
 
 	
-	public FormPane(Button back, Button post) {
+	public FormPane( Button post,Button back) {
 		this.back = back;
 		this.post = post;
 		this.questionTextField = new TextField();
@@ -29,12 +29,14 @@ public class FormPane extends BasePane{
 		this.ansTwoField = new TextField();
 		this.ansThreeField = new TextField();
 		
-		//build the layout of the Form
-		buildLayout();
+		this.back.setOnAction(e -> Main.stage.setScene(Main.main));
+		
+		//build the pane of the Form
+		buildPane();
 	}
 	
 	@Override
-	protected void buildLayout() {
+	public void buildPane() {
 		
 		this.questionTextField.setPromptText("Type here your question ...");
 		this.correctAnsField.setPromptText("Type here the correct answer ...");
@@ -45,9 +47,8 @@ public class FormPane extends BasePane{
 		this.questionTextField.setPrefHeight(80);
 		this.questionTextField.setAlignment(Pos.CENTER);
 		
-		VBox fields = new VBox(15);
+		VBox fields = new VBox(25);
 		fields.setAlignment(Pos.CENTER);
-		fields.setPadding(new Insets(20));
 		fields.getChildren().addAll(this.questionTextField,this.correctAnsField,this.ansOneField,this.ansTwoField,this.ansThreeField);
 		
 		BorderPane buttonsPane = new BorderPane();
@@ -59,6 +60,7 @@ public class FormPane extends BasePane{
 		this.setBottom(buttonsPane);
 		
 	}
+	
 	public TextField getQuestionTextField() {
 		return questionTextField;
 	}
@@ -75,7 +77,7 @@ public class FormPane extends BasePane{
 		return ansThreeField;
 	}
 	
-	
+	//This method is used for handling creating or updating questions
 	public boolean isFieldsEmpty() {
 		//if at least one field is empty ...
 		

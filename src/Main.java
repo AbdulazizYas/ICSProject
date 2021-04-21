@@ -18,9 +18,10 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application{
 	
-	private Stage stage;
-	private Scene main;
-	private Button back;
+	public static Stage stage;
+	public static Scene main;
+	private CreateScene createScene;
+	private EditScene editScene;
 	private Button create;
 	private Button edit;
 	private Button view;
@@ -41,11 +42,9 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		this.stage = stage;
+		Main.stage = stage;
 		
 		qsList = new ArrayList<>();
-		
-		back = new Button("Back");
 		
 		create = new Button("Create");
 		edit = new Button("Edit");
@@ -67,9 +66,13 @@ public class Main extends Application{
 		
 		
 		// -------  handle events ---------//
-		back.setOnAction(e -> stage.setScene(this.main));
-		create.setOnAction(e -> stage.setScene(new CreateScene(qsList,back)));
-		edit.setOnAction(e -> stage.setScene(new EditScene(qsList,back)));
+		
+		createScene = new CreateScene(qsList);
+		editScene = new EditScene(qsList);
+		
+		create.setOnAction(e -> stage.setScene(createScene));
+		
+		edit.setOnAction(e -> stage.setScene(editScene));
 		
 		/*-----------  Designing  ---------------*/
 		designLayout();
@@ -83,11 +86,16 @@ public class Main extends Application{
 		
 		stage.setScene(main);
 		
-		ResizeHelper.addResizeListener(this.stage);
+		
 		stage.setMinHeight(500);
 		stage.setMinWidth(700);
 		stage.setTitle("Questioner");
-		stage.initStyle(StageStyle.UNDECORATED);
+		
+		if(Commons.customBar) {
+			ResizeHelper.addResizeListener(Main.stage);
+			stage.initStyle(StageStyle.UNDECORATED);
+		}
+		
 		stage.show();		
 
 		
@@ -96,7 +104,7 @@ public class Main extends Application{
 	
 	public Background[] getBGs() {
 		BackgroundFill bg1 = new BackgroundFill(
-				Color.valueOf(Constants.primaryColor),
+				Color.valueOf(Commons.primaryColor),
                 new CornerRadii(0),
                 new Insets(0)
 				);
@@ -106,7 +114,7 @@ public class Main extends Application{
                 new Insets(0)
 				);
 		BackgroundFill bg3 = new BackgroundFill(
-				Color.valueOf(Constants.accentColor),
+				Color.valueOf(Commons.accentColor),
                 new CornerRadii(10),
                 new Insets(0)
 				);
@@ -123,13 +131,12 @@ public class Main extends Application{
 		choose.setAlignment(Pos.CENTER);
 		choose.setTextFill(Color.valueOf("#FFF"));
 		choose.setPadding(new Insets(10,5,10,5));
-		choose.setStyle("-fx-background-color: " + Constants.primaryColor + "; -fx-background-radius: 50;"
+		choose.setStyle("-fx-background-color: " + Commons.primaryColor + "; -fx-background-radius: 50;"
 						+ "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.25) , 5, 0.0 , 0 , 1 );");
 		
 		copyright.setAlignment(Pos.CENTER);
 		
-		//welcomePane.setBackground(Bgs[0]);
-		welcomePane.setStyle("-fx-background-color: linear-gradient(to top,"+Constants.primaryColor+ " 25%, "+Constants.primaryColor+"aa 75%);");
+		welcomePane.setStyle("-fx-background-color: linear-gradient(to top,"+Commons.primaryColor+ " 25%, "+Commons.primaryColor+"aa 75%);");
 		
 		allRightSide.setBackground(Bgs[1]);
 		allRightSide.setStyle("-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.25) , 5, 0.0 , 2 , 0 );");
@@ -139,10 +146,10 @@ public class Main extends Application{
 		delete.setFont(Font.font(34));
 		edit.setFont(Font.font(34));
 		
-		create.setStyle(Constants.btn);
-		view.setStyle(Constants.btn);
-		delete.setStyle(Constants.btn);
-		edit.setStyle(Constants.btn);
+		create.setStyle(Commons.btn);
+		view.setStyle(Commons.btn);
+		delete.setStyle(Commons.btn);
+		edit.setStyle(Commons.btn);
 		
 		create.setBackground(Bgs[2]);
 		view.setBackground(Bgs[2]);
@@ -192,7 +199,7 @@ public class Main extends Application{
 		content.getChildren().addAll(welcomePane,allRightSide);
 		content.setAlignment(Pos.CENTER);
 		
-		pane.setTop(topBar);
+		if(Commons.customBar)pane.setTop(topBar);
 		pane.setCenter(content);
 	}
 
@@ -203,15 +210,6 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-//	class BackHandler implements EventHandler<ActionEvent>{
-//
-//		@Override
-//		public void handle(ActionEvent e) {
-//			
-//			
-//		}
-//		
-//	}
 
 	
 

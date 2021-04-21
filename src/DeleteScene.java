@@ -21,7 +21,7 @@ public class DeleteScene extends BaseScene{
 	
 	public DeleteScene(ArrayList<Question> qstList, Button back) {
 	
-		this.selectPane = new SelectionPane(qstList);
+		this.selectPane = new SelectionPane();
 
 		this.back = back;
 		this.delete = new Button("Delete");
@@ -36,7 +36,7 @@ public class DeleteScene extends BaseScene{
 	}
 
 	@Override
-	protected void buildLayout() {
+	protected void build() {
 		// TODO Auto-generated method stub
 		
 	}

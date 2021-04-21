@@ -37,3 +37,7 @@ ICS 108 Project
 
 #### Deleted CreatePane,EditPane,DeletePane,ViewPane and created BaseScene abstract class
 2021, April 20 (Abdulaziz)
+
+
+#### Change Constants to Commons and seperate SelectionPane to seperate file, edited Edit Scene, created BasePane interface
+2021, April 21 (Abdulaziz)
