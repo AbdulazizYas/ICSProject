@@ -3,6 +3,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public class EditScene extends BaseScene {
@@ -15,11 +16,13 @@ public class EditScene extends BaseScene {
 
 	public EditScene(ArrayList<Question> qsList) {
 
-		this.selectPane = new SelectionPane();
+		this.selectPane = new SelectionPane("Modify a question");
 		this.update = new Button("Update");
 		this.form = new FormPane(this.update, this.back);
 		this.qsList = qsList;
-
+		
+		SelectionPane.qsCoList.setItems(SelectionPane.getFormattedList(qsList));
+		
 		SelectionPane.qsCoList.setOnAction(e -> handleSelection());
 
 		this.update.setOnAction(e -> handleUpdating());
@@ -29,7 +32,10 @@ public class EditScene extends BaseScene {
 
 	@Override
 	protected void build() {
-		this.root.setPadding(new Insets(25));
+	
+		this.form.setPadding(new Insets(25));
+		this.form.setStyle(Commons.bgWhite + Commons.innerShadow);
+		
 		this.root.setTop(this.selectPane);
 		this.root.setCenter(this.form);
 
@@ -90,7 +96,7 @@ public class EditScene extends BaseScene {
 		int index = this.qsList.indexOf(this.question);
 		
 		//format the chosen question to be updated in combo box
-		String chosenQuestion = this.question.getID() + " - " + this.question.getQuestionText();
+		String chosenQuestion = (index + 1) + " - " + this.question.getQuestionText();
 		
 		//fix a bug that if there is one question and 
 		

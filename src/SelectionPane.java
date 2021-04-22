@@ -1,22 +1,41 @@
 import java.util.ArrayList;
 
+import javafx.util.Callback;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class SelectionPane extends BorderPane {
 
 	public static ComboBox<String> qsCoList = new ComboBox<>();
-
-	public SelectionPane() {
-
+	private TopBarPane topBar;
+	
+	public SelectionPane(String title) {
+	    topBar = new TopBarPane(Main.stage,title);
+	    
 		qsCoList.setPromptText("-- Select a Question --");;
-
 		qsCoList.setPrefWidth(Double.MAX_VALUE);
-		qsCoList.setStyle("-fx-alignment: center; -fx-text-alignment: center");
-
-		this.setCenter(qsCoList);
+		
+		qsCoList.setStyle("-fx-background-color: #FFF;-fx-border-radius:0;-fx-border-width:3;"
+				+ "-fx-border-color: #FFF;" + "-fx-cursor: hand;");
+		
+		BorderPane content = new BorderPane();
+		content.setCenter(qsCoList);
+		content.setPadding(new Insets(25,25,30,25));
+		content.setStyle(Commons.primaryGradient);
+		if(Commons.customBar)
+		this.setTop(topBar);
+		this.setCenter(content);
 
 	}
 
@@ -26,7 +45,7 @@ public class SelectionPane extends BorderPane {
 
 		// filling the array of question text for each question object
 		for (int i = 0; i < qsArr.length; i++) {
-			qsArr[i] = qsList.get(i).getID() + " - " + qsList.get(i).getQuestionText();
+			qsArr[i] = (i +1) + " - " + qsList.get(i).getQuestionText();
 		}
 		return FXCollections.observableArrayList(qsArr);
 	}

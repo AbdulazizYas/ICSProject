@@ -21,7 +21,7 @@ public class DeleteScene extends BaseScene{
 	
 	public DeleteScene(ArrayList<Question> qstList, Button back) {
 	
-		this.selectPane = new SelectionPane();
+		this.selectPane = new SelectionPane("Delete a question");
 
 		this.back = back;
 		this.delete = new Button("Delete");

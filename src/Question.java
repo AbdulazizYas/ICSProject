@@ -1,9 +1,6 @@
+import java.io.Serializable;
 
-public class Question {
-	
-	private static int numques = 0 ;
-	
-	private int id; 
+public class Question implements Serializable {
 	
 	private String questionText;
 	
@@ -17,20 +14,16 @@ public class Question {
 	
 	public Question(String questionText, String correctAns,
 					String ansOne, String ansTwo, String ansThree) {
-		numques++;
-		this.id = numques;
 		
+
 		this.questionText = questionText;
 		this.correctAns   = correctAns;
 		this.ansOne 	  = ansOne;
 		this.ansTwo 	  = ansTwo;
 		this.ansThree 	  = ansThree;
+
 	}
 	
-	public int getID() {
-		return this.id;
-	}
-
 	public String getQuestionText() {
 		return questionText;
 	}
