@@ -16,17 +16,20 @@ public class EditScene extends BaseScene {
 
 	public EditScene(ArrayList<Question> qsList) {
 
-		this.selectPane = new SelectionPane("Modify a question");
+		this.selectPane = new SelectionPane("Modify a question"); //pass the title of this scene and it will be passed to TopBarPane
 		this.update = new Button("Update");
-		this.form = new FormPane(this.update, this.back);
+		this.form = new FormPane(this.update, this.back);// this back is inherited from BaseScene
 		this.qsList = qsList;
 		
+		//when creating this scene set the items of the combo box
 		SelectionPane.qsCoList.setItems(SelectionPane.getFormattedList(qsList));
 		
+		//when item is selected
 		SelectionPane.qsCoList.setOnAction(e -> handleSelection());
 
 		this.update.setOnAction(e -> handleUpdating());
-
+		
+		//build and design the layout
 		build();
 	}
 
@@ -43,8 +46,9 @@ public class EditScene extends BaseScene {
 
 	// fill the fields with values of the selected question when combo is changed
 	private void handleSelection() {
+		//initialize the question by the selected item in combo box
 		this.question = selectPane.getQuestion(this.qsList);
-
+		//method for filling the fields with the selected question
 		fillFields();
 	}
 	
@@ -64,7 +68,7 @@ public class EditScene extends BaseScene {
 		if (this.question == null) {
 			Commons.openAlert("Question not selected", "You must choose a question to perform the updating",
 					Alert.AlertType.WARNING);
-			return;
+			return; // stop executing method
 		}
 		
 
@@ -72,8 +76,8 @@ public class EditScene extends BaseScene {
 		if (this.form.isFieldsEmpty()) {
 			Commons.openAlert("Empty fields", "You must fill all the fields to update your question",
 					Alert.AlertType.WARNING);
-			fillFields();
-			return;
+			fillFields(); //fill the fields again with the correct data for the selected item
+			return;// stop executing method
 		}
 
 
@@ -98,11 +102,10 @@ public class EditScene extends BaseScene {
 		//format the chosen question to be updated in combo box
 		String chosenQuestion = (index + 1) + " - " + this.question.getQuestionText();
 		
-		//fix a bug that if there is one question and 
-		
 		// change the text in combo box
 		SelectionPane.qsCoList.getItems().set(index, chosenQuestion);
-
+		
+		//open alert that tells the user that question is updated
 		Commons.openAlert("Success", "Your question has been modified successfully!", Alert.AlertType.INFORMATION);
 	}
 

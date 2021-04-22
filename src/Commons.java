@@ -19,6 +19,8 @@ public class Commons {
 	public static final String primaryGradient = "-fx-background-color: linear-gradient(to top,"+primaryColor+ " 25%, "+primaryColor+"aa 75%);";
 	public static final boolean customBar = false;
 	public static final String font = "Arial";
+	public static final int sceneWidth = 950;
+	public static final int sceneHeight = 600;
 	
 	public static void openAlert(String title,String msg, AlertType type) {
 		Alert alert = new Alert(type);

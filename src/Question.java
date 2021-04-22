@@ -1,21 +1,15 @@
 import java.io.Serializable;
 
-public class Question implements Serializable {
-	
+public class Question implements Serializable {//so that it can be written in .dat file
+	//declare the question text and the correct answer and other 3 answers
 	private String questionText;
-	
 	private String correctAns;
-	
 	private String ansOne;
-	
 	private String ansTwo;
-	
 	private String ansThree;
 	
 	public Question(String questionText, String correctAns,
 					String ansOne, String ansTwo, String ansThree) {
-		
-
 		this.questionText = questionText;
 		this.correctAns   = correctAns;
 		this.ansOne 	  = ansOne;
@@ -23,7 +17,7 @@ public class Question implements Serializable {
 		this.ansThree 	  = ansThree;
 
 	}
-	
+	/* getters and setters for the fields */
 	public String getQuestionText() {
 		return questionText;
 	}
@@ -63,7 +57,7 @@ public class Question implements Serializable {
 	public void setAnsThree(String ansThree) {
 		this.ansThree = ansThree;
 	}
-	
+	//toString to represent the question object as String
 	@Override
 	public String toString() {
 		return "Question: " + this.questionText + ", Its correct answer is: "+ this.correctAns 

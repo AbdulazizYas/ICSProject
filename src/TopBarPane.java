@@ -17,71 +17,71 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-
+//this pane for custom top bar 
 public class TopBarPane extends BorderPane implements BasePane{
 	
 	private Stage stage;
-	private double xOff = 0;
+	//offset used to move the stage when the top bar is being dragged
+	private double xOff = 0; 
 	private double yOff = 0;
 	private Label title ;
+	//the symbols of the top bar
 	private Label X = new Label("X");
 	private Label maximize = new Label("\u25FC");
 	private Label minimize = new Label("\u2501");
 	
 	public TopBarPane(Stage stage,String title) {
 		this.stage = stage;
-		this.title = new Label("Questioner || "+title);
+		this.title = new Label("Questioner || "+title); //this title is received by SelectionPane or CreateScene
 	
+		//build the layout of this pane
 		buildPane();
 	}
 	
 	@Override
 	public void buildPane() {
+		//HBox for the buttons of (X, square,-)
 		HBox buttons = new HBox(10);
-		X.setFont(Font.font(16));
-		maximize.setFont(Font.font(16));
-		minimize.setFont(Font.font(16));
 		
 		X.setPadding(new Insets(5,20,5,20));
 		maximize.setPadding(new Insets(5,20,5,20));
 		minimize.setPadding(new Insets(5,20,5,20));
 		
+		//set the default style for each button
+		X.setStyle(Commons.cursor + "-fx-font-size:16; -fx-text-fill:#FFF");
+		maximize.setStyle(Commons.cursor + "-fx-font-size:16; -fx-text-fill:#FFF");
+		minimize.setStyle(Commons.cursor + "-fx-font-size:16; -fx-text-fill:#FFF");
 		
-		X.setStyle(Commons.cursor);
-		maximize.setStyle(Commons.cursor);
-		minimize.setStyle(Commons.cursor);
-		
-		X.setOnMouseEntered(e -> X.setStyle(Commons.cursor+ "-fx-background-color:#DF362D"));
-		X.setOnMouseExited(e -> X.setStyle(Commons.cursor+"-fx-background-color: transparent"));
-		
-		maximize.setOnMouseEntered(e -> maximize.setStyle(Commons.cursor+ Commons.bgPrimary+"55"));
-		maximize.setOnMouseExited(e -> maximize.setStyle(Commons.cursor+"-fx-background-color: transparent"));
-		
-		minimize.setOnMouseEntered(e -> minimize.setStyle(Commons.cursor+ Commons.bgPrimary+"55"));
-		minimize.setOnMouseExited(e -> minimize.setStyle(Commons.cursor+"-fx-background-color: transparent"));
+		//set the style when cursor hover each button
+		X.setOnMouseEntered(e -> X.setStyle(Commons.cursor+ "-fx-background-color:#DF362D;-fx-font-size:16; -fx-text-fill:#FFF"));
+		X.setOnMouseExited(e -> X.setStyle(Commons.cursor+"-fx-background-color: transparent;-fx-font-size:16; -fx-text-fill:#FFF"));
+		maximize.setOnMouseEntered(e -> maximize.setStyle(Commons.cursor+ Commons.bgPrimary+"55;-fx-font-size:16; -fx-text-fill:#FFF"));
+		maximize.setOnMouseExited(e -> maximize.setStyle(Commons.cursor+"-fx-background-color: transparent;-fx-font-size:16; -fx-text-fill:#FFF"));
+		minimize.setOnMouseEntered(e -> minimize.setStyle(Commons.cursor+ Commons.bgPrimary+"55;-fx-font-size:16; -fx-text-fill:#FFF"));
+		minimize.setOnMouseExited(e -> minimize.setStyle(Commons.cursor+"-fx-background-color: transparent;-fx-font-size:16; -fx-text-fill:#FFF"));
 		
 		
-		X.setOnMouseClicked(e -> Platform.exit());
+		X.setOnMouseClicked(e -> Platform.exit()); // if X is clicked exit the app
+		
 		maximize.setOnMouseClicked(e -> {
-			if(stage.isMaximized())stage.setMaximized(false);
-			else stage.setMaximized(true);
+			if(stage.isMaximized())stage.setMaximized(false); 
+			else stage.setMaximized(true); // if maximize is clicked and it is not maximize then maximize it
 		});
-		minimize.setOnMouseClicked(e -> stage.setIconified(true));
 		
-		X.setTextFill(Color.valueOf("#FFF"));
-		maximize.setTextFill(Color.valueOf("#FFF"));
-		minimize.setTextFill(Color.valueOf("#FFF"));
+		minimize.setOnMouseClicked(e -> stage.setIconified(true));// make the stage hidden in taskbar
 		
+		//style the title of the scene that at the left of the pane
+		this.title.setFont(Font.font(Commons.font, FontWeight.BOLD, 12));
+		this.title.setTextFill(Color.valueOf("#FFF"));
+		this.title.setPadding(new Insets(0,0,0,10));
+		BorderPane.setAlignment(this.title, Pos.CENTER);
+		
+		//style and structure the TopBarPAne
 		this.prefWidthProperty().bind(stage.widthProperty());
 		this.setPrefHeight(32);
 		this.setStyle(Commons.bgPrimary+"aa;");
 		this.setRight(buttons);
 		this.setLeft(this.title);
-		
-		this.title.setFont(Font.font(Commons.font, FontWeight.BOLD, 12));
-		this.title.setTextFill(Color.valueOf("#FFF"));
-		this.title.setPadding(new Insets(0,0,0,10));
-		BorderPane.setAlignment(this.title, Pos.CENTER);
 		
 		//Set Dragging the stage for the custom top bar
 		this.setOnMousePressed(e -> {

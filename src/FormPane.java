@@ -12,11 +12,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
-
+// this pane is used in CreateScene and EditScene since both are using TextFields
 public class FormPane extends BorderPane implements BasePane{
 	
 	public  Button back;
-	private Button post;
+	private Button post; // post can be create or update, each scene will define what is it
 	private TextField questionTextField;
 	private TextField correctAnsField;
 	private TextField ansOneField;
@@ -25,7 +25,7 @@ public class FormPane extends BorderPane implements BasePane{
 
 	
 	public FormPane( Button post,Button back) {
-		this.back = back;
+		this.back = back; //the scene has back button from BaseScene, so all scenes uses this pane will pass back button
 		this.post = post;
 		this.questionTextField = new TextField();
 		this.correctAnsField = new TextField();
@@ -33,27 +33,27 @@ public class FormPane extends BorderPane implements BasePane{
 		this.ansTwoField = new TextField();
 		this.ansThreeField = new TextField();
 		
-		this.back.setOnAction(e -> Main.stage.setScene(Main.main));
-		
 		//build the pane of the Form
 		buildPane();
 	}
 	
 	@Override
 	public void buildPane() {
-		
+		// set the prompt(placeholder for each field)
 		this.questionTextField.setPromptText("Type here your question ...");
 		this.correctAnsField.setPromptText("Type here the correct answer ...");
 		this.ansOneField.setPromptText("Type here answer 1 ..");
 		this.ansTwoField.setPromptText("Type here answer 2 ..");
 		this.ansThreeField.setPromptText("Type here answer 3 ..");
 		
+		//style the fields and make the correct answer field with green shodow
 		this.questionTextField.setStyle(Commons.textField + Commons.shadow);
 		this.correctAnsField.setStyle(Commons.textField +"-fx-effect: dropshadow( three-pass-box , rgba(98, 206, 103, 0.5) , 2, 2.0 , 0 , 1 );");
 		this.ansOneField.setStyle(Commons.textField + Commons.shadow);
 		this.ansTwoField.setStyle(Commons.textField + Commons.shadow);
 		this.ansThreeField.setStyle(Commons.textField + Commons.shadow);
 		
+		//set the max width of each field relative to the computer screen width 
 		double fieldWidth = Screen.getPrimary().getBounds().getWidth()/1.25;
 		this.questionTextField.setMaxWidth(fieldWidth);
 		this.correctAnsField.setMaxWidth(fieldWidth);
@@ -61,25 +61,21 @@ public class FormPane extends BorderPane implements BasePane{
 		this.ansTwoField.setMaxWidth(fieldWidth);
 		this.ansThreeField.setMaxWidth(fieldWidth);
 		
-		this.correctAnsField.setStyle(Commons.textField +"-fx-effect: dropshadow( three-pass-box , rgba(98, 206, 103, 0.5) , 2, 2.0 , 0 , 1 );");
-		this.ansOneField.setStyle(Commons.textField + Commons.shadow);
-		this.ansTwoField.setStyle(Commons.textField + Commons.shadow);
-		this.ansThreeField.setStyle(Commons.textField + Commons.shadow);
-		
 		this.questionTextField.setPrefHeight(80);
 		this.questionTextField.setAlignment(Pos.CENTER);
 		
+		//specific pane for fields
 		VBox fields = new VBox(25);
 		fields.setAlignment(Pos.CENTER);
 		fields.getChildren().addAll(this.questionTextField,this.correctAnsField,this.ansOneField,this.ansTwoField,this.ansThreeField);
 		fields.setPadding(new Insets(16,0,16,0));
 		
-		this.post.setStyle(Commons.btn + Commons.bgPrimary);
+		//style the post button whether it was create or update
+		this.post.setStyle(Commons.btn + Commons.bgPrimary + ";-fx-font-size:16; -fx-text-fill:#FFF");
 		this.post.setPadding(new Insets(10));
 		this.post.prefWidthProperty().bind(Main.stage.widthProperty().divide(10));
-		this.post.setTextFill(Color.valueOf("#FFF"));
-		this.post.setFont(Font.font(16));
 		
+		//specific pane for both buttons post and back
 		BorderPane buttonsPane = new BorderPane();
 		buttonsPane.setRight(this.post);
 		buttonsPane.setLeft(this.back);
@@ -89,7 +85,7 @@ public class FormPane extends BorderPane implements BasePane{
 		this.setBottom(buttonsPane);
 		
 	}
-	
+	//------- getters of each TextFiel ----- ///
 	public TextField getQuestionTextField() {
 		return questionTextField;
 	}
