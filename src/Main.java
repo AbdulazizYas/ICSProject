@@ -28,11 +28,11 @@ public class Main extends Application{
 	//static fields for outside usage
 	public static Stage stage;
 	public static Scene main;
-	// Scenes fields
-	private CreateScene createScene;
-	private EditScene editScene;
-	private ViewScene viewScene;
-	private DeleteScene deleteScene;
+	// Scenes  static fields
+	public static CreateScene createScene;
+	public static EditScene editScene;
+	public static ViewScene viewScene;
+	public static DeleteScene deleteScene;
 	//buttons for each scene
 	private Button create;
 	private Button edit;
@@ -103,10 +103,14 @@ public class Main extends Application{
 		//pass the question list to handle the operations
 		createScene = new CreateScene(qsList);
 		editScene = new EditScene(qsList);
+		viewScene = new ViewScene(qsList);
+		deleteScene = new DeleteScene(qsList);
 		
 		create.setOnAction(e -> stage.setScene(createScene));
-		edit.setOnAction(e -> stage.setScene(editScene));
-		
+		edit.setOnAction(e ->stage.setScene(editScene));
+		view.setOnAction(e -> stage.setScene(viewScene));
+		//delete.setOnAction(e -> stage.setScene(deleteScene));
+
 		/*===========  Call the method that build and set the structure of the main scene =============*/
 		buildLayout();
 		
@@ -130,6 +134,8 @@ public class Main extends Application{
 		choose.setTextFill(Color.valueOf("#FFF"));
 		choose.setPadding(new Insets(10,5,10,5));
 		choose.setStyle(Commons.title + Commons.shadow);
+		//style copyright
+		copyright.setStyle("-fx-text-fill: " + Commons.accentColor);
 		//design the left side pane 
 		welcomePane.setStyle(Commons.primaryGradient);
 		//style the right side pane
@@ -139,8 +145,7 @@ public class Main extends Application{
 		create.setStyle(Commons.btn + Commons.bgAccent + "; -fx-font-size: 34; -fx-text-fill:#FFF");
 		view.setStyle(Commons.btn + Commons.bgAccent + "; -fx-font-size: 34; -fx-text-fill:#FFF");
 		delete.setStyle(Commons.btn + Commons.bgAccent + "; -fx-font-size: 34; -fx-text-fill:#FFF");
-		edit.setStyle(Commons.btn + Commons.bgAccent + "; -fx-font-size: 34; -fx-text-fill:#FFF");
-		
+		edit.setStyle(Commons.btn + Commons.bgAccent + "; -fx-font-size: 34; -fx-text-fill:#FFF");	
 	}
 	
 	//for building and structuring the layout and set the widths and heights all nodes
@@ -209,15 +214,9 @@ public class Main extends Application{
 			}
 			out.close();
 		}
-	}
-	
+	}	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	
-
 }
-
-
-

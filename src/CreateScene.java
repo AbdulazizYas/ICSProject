@@ -43,7 +43,7 @@ public class CreateScene extends BaseScene {
 		title.setPadding(new Insets(10,5,10,5));
 		BorderPane.setAlignment(title, Pos.CENTER);
 		
-		// if customBar is true then make another pane for content withour\t customBar
+		// if customBar is true then make another pane for content without customBar
 		if(Commons.customBar) {
 			BorderPane content = new BorderPane();
 			content.setStyle(Commons.bgWhite + Commons.innerShadow);
@@ -77,10 +77,10 @@ public class CreateScene extends BaseScene {
 		this.qsList.add(q);
 		
 		//if the question is created then update the combo box of each scene by the method getFormattedList
-		SelectionPane.qsCoList.setItems(SelectionPane.getFormattedList(this.qsList));
+		Commons.updateAllCombos(qsList);
 		//open alert that tells the user that question is created
 		Commons.openAlert("Success", "Your question has been created successfully!", Alert.AlertType.INFORMATION);
-		//empty all fields after creating questoin
+		//empty all fields after creating question
 		this.form.getQuestionTextField().setText("");
 		this.form.getCorrectAnsField().setText("");
 		this.form.getAnsOneField().setText("");

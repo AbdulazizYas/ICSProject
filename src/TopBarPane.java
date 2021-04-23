@@ -1,6 +1,7 @@
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -29,6 +30,8 @@ public class TopBarPane extends BorderPane implements BasePane{
 	private Label X = new Label("X");
 	private Label maximize = new Label("\u25FC");
 	private Label minimize = new Label("\u2501");
+	
+	private CheckBox darkOrLight = new CheckBox();
 	
 	public TopBarPane(Stage stage,String title) {
 		this.stage = stage;
@@ -59,8 +62,7 @@ public class TopBarPane extends BorderPane implements BasePane{
 		maximize.setOnMouseExited(e -> maximize.setStyle(Commons.cursor+"-fx-background-color: transparent;-fx-font-size:16; -fx-text-fill:#FFF"));
 		minimize.setOnMouseEntered(e -> minimize.setStyle(Commons.cursor+ Commons.bgPrimary+"55;-fx-font-size:16; -fx-text-fill:#FFF"));
 		minimize.setOnMouseExited(e -> minimize.setStyle(Commons.cursor+"-fx-background-color: transparent;-fx-font-size:16; -fx-text-fill:#FFF"));
-		
-		
+				
 		X.setOnMouseClicked(e -> Platform.exit()); // if X is clicked exit the app
 		
 		maximize.setOnMouseClicked(e -> {
@@ -76,11 +78,28 @@ public class TopBarPane extends BorderPane implements BasePane{
 		this.title.setPadding(new Insets(0,0,0,10));
 		BorderPane.setAlignment(this.title, Pos.CENTER);
 		
+		
+//		HBox checkPane = new HBox(8);
+//		Label checkTxt = new Label("Dark/Light");
+//		checkPane.setAlignment(Pos.CENTER);
+//		
+//		checkTxt.setStyle("-fx-text-fill: " + Commons.accentColor + ";-fx-font-weight: bold");
+//		checkPane.getChildren().addAll(this.darkOrLight,checkTxt);
+//		
+//		this.darkOrLight.setOnAction(e -> {
+//			if(darkOrLight.isSelected()) {
+//				Commons.darkMode = true;
+//			}else {
+//				Commons.darkMode = false;
+//			}
+//		});
+		
 		//style and structure the TopBarPAne
 		this.prefWidthProperty().bind(stage.widthProperty());
 		this.setPrefHeight(32);
-		this.setStyle(Commons.bgPrimary+"aa;");
+		this.setStyle(Commons.bgPrimary+"cc");
 		this.setRight(buttons);
+		//this.setCenter(checkPane);
 		this.setLeft(this.title);
 		
 		//Set Dragging the stage for the custom top bar

@@ -1,37 +1,47 @@
 import java.util.ArrayList;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 
 public class ViewScene extends BaseScene{
 	
-	private SelectionPane selectPane;
+	public SelectionPane selectPane;
+	private VDFormPane form;
 	
-	private Button back;
 	
-	private Label question;
-	private Label correctAns;
-	private Label ansOne;
-	private Label ansTwo;
-	private Label ansThree;
+
 	
-	public ViewScene(ArrayList<Question> qstList, Button back) {
-		this.back = back;
+	public ViewScene(ArrayList<Question> qstList) {
 		
-		this.question = new Label();
-		this.correctAns = new Label();
-		this.ansOne = new Label();
-		this.ansTwo = new Label();
-		this.ansThree = new Label();
 		
+		this.selectPane = new SelectionPane("View a question");
+		
+		this.form = new VDFormPane(qstList, this.back);
+		
+		selectPane.getCombo().setItems(SelectionPane.getFormattedList(qstList));
+		selectPane.getCombo().setOnAction(e -> getVDForm().handleView());
+		
+		build();
 	}
 
 	@Override
 	protected void build() {
-		// TODO Auto-generated method stub
-		
+
+		this.root.setTop(selectPane);
+		this.root.setCenter(form);
+
+	}
+	
+	public SelectionPane getSelectPane() {
+		return this.selectPane;
+	}
+	
+	public VDFormPane getVDForm() {
+		return this.form;
 	}
 }
 

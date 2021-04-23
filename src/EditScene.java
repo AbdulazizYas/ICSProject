@@ -22,11 +22,11 @@ public class EditScene extends BaseScene {
 		this.qsList = qsList;
 		
 		//when creating this scene set the items of the combo box
-		SelectionPane.qsCoList.setItems(SelectionPane.getFormattedList(qsList));
+		selectPane.getCombo().setItems(SelectionPane.getFormattedList(qsList));
 		
-		//when item is selected
-		SelectionPane.qsCoList.setOnAction(e -> handleSelection());
-
+		//set handling the selection
+		selectPane.getCombo().setOnAction(e -> handleSelection());
+		
 		this.update.setOnAction(e -> handleUpdating());
 		
 		//build and design the layout
@@ -43,11 +43,16 @@ public class EditScene extends BaseScene {
 		this.root.setCenter(this.form);
 
 	}
+	
+	public SelectionPane getSelectPane() {
+		return this.selectPane;
+	}
 
 	// fill the fields with values of the selected question when combo is changed
 	private void handleSelection() {
+		
 		//initialize the question by the selected item in combo box
-		this.question = selectPane.getQuestion(this.qsList);
+		question = selectPane.getQuestion(this.qsList);
 		//method for filling the fields with the selected question
 		fillFields();
 	}
@@ -103,7 +108,7 @@ public class EditScene extends BaseScene {
 		String chosenQuestion = (index + 1) + " - " + this.question.getQuestionText();
 		
 		// change the text in combo box
-		SelectionPane.qsCoList.getItems().set(index, chosenQuestion);
+		selectPane.getCombo().getItems().set(index, chosenQuestion);
 		
 		//open alert that tells the user that question is updated
 		Commons.openAlert("Success", "Your question has been modified successfully!", Alert.AlertType.INFORMATION);

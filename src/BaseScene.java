@@ -39,5 +39,3 @@ public abstract class BaseScene extends Scene {
 interface BasePane {
 	void buildPane();
 }
-
-

@@ -18,7 +18,7 @@ import javafx.scene.text.Font;
 //this pane for selecting questions in EditScene,ViewScene,DeleteScene
 public class SelectionPane extends BorderPane {
 	//combo box is static for all scene and to be updated by other scenes 
-	public static ComboBox<String> qsCoList = new ComboBox<>();
+	private ComboBox<String> qsCoList = new ComboBox<>();
 	private TopBarPane topBar; 
 	
 	//the title param is for passing it to TopBarPane to set the title of the current Scene
@@ -32,7 +32,7 @@ public class SelectionPane extends BorderPane {
 		qsCoList.setPrefWidth(Double.MAX_VALUE);
 		qsCoList.setStyle("-fx-background-color: #FFF;-fx-border-radius:0;-fx-border-width:3;"
 				+ "-fx-border-color: #FFF;" + "-fx-cursor: hand;");
-		
+
 		//pane for the content which is the combo box and style it
 		BorderPane content = new BorderPane();
 		content.setCenter(qsCoList);
@@ -75,9 +75,11 @@ public class SelectionPane extends BorderPane {
 			int index = Integer.parseInt(questionTextInCombo.split(" ")[0]) - 1;
 			return qsList.get(index);
 		}
-
 		// if questionInCB == null, then return the first question || *NOTE* THIS FIX A BUG THAT RETURN NULL FOR FIRST QUESTION 
 		return qsList.get(0);
 	}
-
+	
+	public ComboBox<String> getCombo(){
+		return this.qsCoList;
+	}
 }

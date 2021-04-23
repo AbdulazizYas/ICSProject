@@ -19,7 +19,7 @@ public class DeleteScene extends BaseScene{
 	private Label ansTwo;
 	private Label ansThree;
 	
-	public DeleteScene(ArrayList<Question> qstList, Button back) {
+	public DeleteScene(ArrayList<Question> qstList) {
 	
 		this.selectPane = new SelectionPane("Delete a question");
 
@@ -39,6 +39,10 @@ public class DeleteScene extends BaseScene{
 	protected void build() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public SelectionPane getSelectPane() {
+		return this.selectPane;
 	}
 }
 
