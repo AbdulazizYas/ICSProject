@@ -3,6 +3,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -30,8 +32,6 @@ public class TopBarPane extends BorderPane implements BasePane{
 	private Label X = new Label("X");
 	private Label maximize = new Label("\u25FC");
 	private Label minimize = new Label("\u2501");
-	
-	private CheckBox darkOrLight = new CheckBox();
 	
 	public TopBarPane(Stage stage,String title) {
 		this.stage = stage;
@@ -78,21 +78,10 @@ public class TopBarPane extends BorderPane implements BasePane{
 		this.title.setPadding(new Insets(0,0,0,10));
 		BorderPane.setAlignment(this.title, Pos.CENTER);
 		
-		
-//		HBox checkPane = new HBox(8);
-//		Label checkTxt = new Label("Dark/Light");
-//		checkPane.setAlignment(Pos.CENTER);
-//		
-//		checkTxt.setStyle("-fx-text-fill: " + Commons.accentColor + ";-fx-font-weight: bold");
-//		checkPane.getChildren().addAll(this.darkOrLight,checkTxt);
-//		
-//		this.darkOrLight.setOnAction(e -> {
-//			if(darkOrLight.isSelected()) {
-//				Commons.darkMode = true;
-//			}else {
-//				Commons.darkMode = false;
-//			}
-//		});
+		//set icon for the stage
+		ImageView icon = new ImageView("logo2.png");
+		icon.setFitWidth(18);icon.setFitHeight(18);
+		this.title.setGraphic(icon);
 		
 		//style and structure the TopBarPAne
 		this.prefWidthProperty().bind(stage.widthProperty());

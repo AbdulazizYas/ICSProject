@@ -14,9 +14,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 // this pane is used in CreateScene and EditScene since both are using TextFields
-public class VDFormPane extends BorderPane implements BasePane{
+public class DisplayPane extends BorderPane implements BasePane{
 	
-	public  Button back;
 	private ArrayList<Question> qsList;
 	private Question question;
 	private Label questionText;
@@ -26,17 +25,17 @@ public class VDFormPane extends BorderPane implements BasePane{
 	private Label ansThree;
 
 	
-	public VDFormPane(ArrayList<Question> qsList,Button back) {
-		this.back = back; //the scene has back button from BaseScene, so all scenes uses this pane will pass back button
+	public DisplayPane(ArrayList<Question> qsList) {
+		//this.back = back; //the scene has back button from BaseScene, so all scenes uses this pane will pass back button
 		
-		this.qsList = qsList;
-		
+		this.qsList = qsList;	
 		
 		this.questionText = new Label("Q. Select a question");
 		this.correctAns = new Label("1.");
 		this.ansOne = new Label("2.");
 		this.ansTwo = new Label("3.");
 		this.ansThree = new Label("4.");
+		
 		//build the pane of the Form
 		buildPane();
 	}
@@ -47,13 +46,19 @@ public class VDFormPane extends BorderPane implements BasePane{
 		Font fontSize = new Font(Commons.font, 19);
 		
 		this.questionText.setFont(Font.font(Commons.font, FontWeight.BOLD, 21));
+		this.questionText.setStyle("-fx-text-fill: "+ (Commons.darkMode? "#fdfdfd" : "#202020") +";");
 		
 		this.correctAns.setFont(Font.font(Commons.font,FontWeight.BOLD, 20));
 		this.correctAns.setTextFill(Color.valueOf("#62ce67"));
 		
 		this.ansOne.setFont(fontSize);
+		this.ansOne.setStyle("-fx-text-fill: "+ (Commons.darkMode? "#fdfdfd" : "#202020") +";");
+		
 		this.ansTwo.setFont(fontSize);
+		this.ansTwo.setStyle("-fx-text-fill: "+ (Commons.darkMode? "#fdfdfd" : "#202020") +";");
+		
 		this.ansThree.setFont(fontSize);
+		this.ansThree.setStyle("-fx-text-fill: "+ (Commons.darkMode? "#fdfdfd" : "#202020") +";");
 		
 		
 		VBox vb2 = new VBox(25);
@@ -65,15 +70,15 @@ public class VDFormPane extends BorderPane implements BasePane{
 		vb1.getChildren().addAll(questionText,vb2);
 
 		this.setCenter(vb1);
-		this.setBottom(this.back);
-		
+		//this.setBottom(this.back);
+		this.setStyle(Commons.bgSecondary+";" + Commons.innerShadow);
 		
 		
 	}
 	
 	public void handleView() {
 		
-		this.question = Main.viewScene.selectPane.getQuestion(this.qsList);
+		this.question = Main.viewScene.getSelectPane().getQuestion(this.qsList);
 		
 		this.questionText.setText("Q. "+ question.getQuestionText());
 		this.correctAns.setText("1. " + question.getCorrectAns());

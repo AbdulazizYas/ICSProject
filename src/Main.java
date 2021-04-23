@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -93,6 +94,7 @@ public class Main extends Application{
 		stage.setMinWidth(700);
 		
 		stage.setTitle("Questioner");
+		stage.getIcons().add(new Image("logo.jpeg"));
 		
 		//to benefit from custom top bar we should make stage undecorated
 		if(Commons.customBar) {
