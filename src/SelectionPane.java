@@ -66,20 +66,18 @@ public class SelectionPane extends BorderPane {
 	public Question getQuestion(ArrayList<Question> qsList) {
 		//get the selected item
 		String questionTextInCombo = qsCoList.getValue();
-		//if the selected item is this, so the question has not been selected and the caller will check if the returned value is null
-		if (questionTextInCombo == "-- Select a Question --")
-			return null;
 		
 		if (questionTextInCombo != null) {
 			// get the index from the id beside each item in combo box
 			int index = Integer.parseInt(questionTextInCombo.split(" ")[0]) - 1;
 			return qsList.get(index);
 		}
-		// if questionInCB == null, then return the first question || *NOTE* THIS FIX A BUG THAT RETURN NULL FOR FIRST QUESTION 
-		return qsList.get(0);
+		//if the selected item is this, so the question has not been selected and the caller will check if the returned value is null
+		return null;
 	}
 	
 	public ComboBox<String> getCombo(){
 		return this.qsCoList;
 	}
+	
 }

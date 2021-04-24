@@ -11,21 +11,23 @@ import javafx.scene.control.Label;
 
 public class ViewScene extends BaseScene{
 	
+	
 	private SelectionPane selectPane;
 	private DisplayPane display;
 	
 	public ViewScene(ArrayList<Question> qstList) {
 		
-		
-		this.selectPane = new SelectionPane("View a question");
-		
 		this.display = new DisplayPane(qstList);
 		
-		//set the items of combo box with the question list when the ViewScene is created
+		// Changing the title and putting a combo box for the ViewScene
+		this.selectPane = new SelectionPane("View a question");
+		
+		// Set the items of combo box with the question list when the ViewScene is created
 		selectPane.getCombo().setItems(SelectionPane.getFormattedList(qstList));
 		
-		//handle the selection of combo box in view scene with handleView located in VDFormPane
-		selectPane.getCombo().setOnAction(e -> getVDForm().handleView());
+		// Handle the selection of combo box in view scene with handleDisplay located in DisplayPane
+		selectPane.getCombo().setOnAction(e -> this.display.handleDisplay(Main.viewScene.getSelectPane().getQuestion(qstList)));
+		
 		
 		build();
 	}
@@ -33,6 +35,7 @@ public class ViewScene extends BaseScene{
 	@Override
 	protected void build() {
 		
+		// a BorderPane for the buttons
 		BorderPane buttons = new BorderPane();
 		buttons.setLeft(this.back);
 		buttons.setPadding(new Insets(25));
@@ -40,9 +43,10 @@ public class ViewScene extends BaseScene{
 		
 		this.display.setPadding(new Insets(25));
 		
-		this.root.setTop(selectPane);
-		this.root.setCenter(display);
-		this.root.setBottom(buttons);
+		// root refers to the BorderPane inherited from the BaseScene Class
+		this.root.setTop(selectPane); // ComboBox
+		this.root.setCenter(display); // Displaying question + answers
+		this.root.setBottom(buttons); // Buttons
 
 	}
 	
@@ -50,8 +54,8 @@ public class ViewScene extends BaseScene{
 		return this.selectPane;
 	}
 	
-	public DisplayPane getVDForm() {
+	/*public DisplayPane getDisplayPane() {
 		return this.display;
-	}
+	}*/
 }
 

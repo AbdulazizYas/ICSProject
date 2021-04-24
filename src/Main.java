@@ -67,7 +67,7 @@ public class Main extends Application{
 		allContent = new HBox();
 		welcome = new Label("Welcome \n to Questions Bank App!");
 		choose = new Label("Choose your action");
-		copyright = new Label("Questioner © Developed by Abdulaziz & Yousef");
+		copyright = new Label("Questioner ï¿½ Developed by Abdulaziz & Yousef");
 		
 		//Initialize Scenes buttons
 		create = new Button("Create");
@@ -111,7 +111,7 @@ public class Main extends Application{
 		create.setOnAction(e -> stage.setScene(createScene));
 		edit.setOnAction(e ->stage.setScene(editScene));
 		view.setOnAction(e -> stage.setScene(viewScene));
-		//delete.setOnAction(e -> stage.setScene(deleteScene));
+		delete.setOnAction(e -> stage.setScene(deleteScene));
 
 		/*===========  Call the method that build and set the structure of the main scene =============*/
 		buildLayout();
