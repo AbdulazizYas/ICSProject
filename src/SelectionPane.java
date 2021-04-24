@@ -1,34 +1,25 @@
 import java.util.ArrayList;
-
-import javafx.util.Callback;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 //this pane for selecting questions in EditScene,ViewScene,DeleteScene
 public class SelectionPane extends BorderPane {
-	//combo box is static for all scene and to be updated by other scenes 
-	private ComboBox<String> qsCoList = new ComboBox<>();
+	
+	private ComboBox<String> qsCoList;
 	private TopBarPane topBar; 
 	
-	//the title param is for passing it to TopBarPane to set the title of the current Scene
+	//the title parameter is for passing it to TopBarPane to set the title of the current Scene
 	public SelectionPane(String title) {
+		
+		qsCoList = new ComboBox<>();
 	    topBar = new TopBarPane(Main.stage,title);
 	    
 	    //set the default text inside the combo box
 		qsCoList.setPromptText("-- Select a Question --");
 		
-		//styling combo box
 		qsCoList.setPrefWidth(Double.MAX_VALUE);
 		qsCoList.setStyle("-fx-background-color: #FFF;-fx-border-radius:0;-fx-border-width:3;"
 				+ "-fx-border-color: #FFF;" + "-fx-cursor: hand;");
@@ -46,6 +37,7 @@ public class SelectionPane extends BorderPane {
 		this.setCenter(content); //set the combo box's pane to the center
 	}
 
+	
 	/* this method is for outside usage
 	 * it receives the question list and format each question text as (id - questionText)  
 	 */
@@ -59,6 +51,7 @@ public class SelectionPane extends BorderPane {
 		}
 		return FXCollections.observableArrayList(qsArr);
 	}
+	
 	
 	/* this method receives the question list 
 	 * it uses the question list to get the question by the index that is got by the following process

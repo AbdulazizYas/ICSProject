@@ -1,33 +1,27 @@
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 //this pane for custom top bar 
 public class TopBarPane extends BorderPane implements BasePane{
 	
 	private Stage stage;
+	
 	//offset used to move the stage when the top bar is being dragged
 	private double xOff = 0; 
 	private double yOff = 0;
+	
+	//title for the stage
 	private Label title ;
+	
 	//the symbols of the top bar
 	private Label X = new Label("X");
 	private Label maximize = new Label("\u25FC");
@@ -88,7 +82,6 @@ public class TopBarPane extends BorderPane implements BasePane{
 		this.setPrefHeight(32);
 		this.setStyle(Commons.bgPrimary+"cc");
 		this.setRight(buttons);
-		//this.setCenter(checkPane);
 		this.setLeft(this.title);
 		
 		//Set Dragging the stage for the custom top bar

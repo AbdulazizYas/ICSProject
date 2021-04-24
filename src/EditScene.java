@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 public class EditScene extends BaseScene {
 
@@ -24,7 +21,6 @@ public class EditScene extends BaseScene {
 		//when creating this scene set the items of the combo box
 		selectPane.getCombo().setItems(SelectionPane.getFormattedList(qsList));
 		
-		//set handling the selection
 		selectPane.getCombo().setOnAction(e -> handleSelection());
 		
 		this.update.setOnAction(e -> handleUpdating());
@@ -53,11 +49,11 @@ public class EditScene extends BaseScene {
 		
 		//initialize the question by the selected item in combo box
 		question = selectPane.getQuestion(this.qsList);
-		//method for filling the fields with the selected question
-		fillFields();
+		
+		if(question != null)
+			fillFields(); //method for filling the fields with the selected question
 	}
 	
-	//for filling the fields for the chosen question
 	private void fillFields() {
 		this.form.getQuestionTextField().setText(this.question.getQuestionText());
 		this.form.getCorrectAnsField().setText(this.question.getCorrectAns());
@@ -66,42 +62,33 @@ public class EditScene extends BaseScene {
 		this.form.getAnsThreeField().setText(this.question.getAnsThree());
 	}
 	
-	//update the question selected with values of the fields
 	private void handleUpdating() {
 		
 		// if question object is null, then the question has not been selected
 		if (this.question == null) {
 			Commons.openAlert("Question not selected", "You must choose a question to perform the updating",
 					Alert.AlertType.WARNING);
-			return; // stop executing method
+			return; 
 		}
 		
 
-		// check if all fields are not empty
+		// check if all fields are not empty so it can update
 		if (this.form.isFieldsEmpty()) {
 			Commons.openAlert("Empty fields", "You must fill all the fields to update your question",
 					Alert.AlertType.WARNING);
+			
 			fillFields(); //fill the fields again with the correct data for the selected item
-			return;// stop executing method
+			return;
 		}
 
-
-		// set the question text of question object
+		// ----- Now set each field of question object with corresponding TextField's value ------///
+		
 		this.question.setQuestionText(form.getQuestionTextField().getText());
-
-		// set the correct answer of question object
 		this.question.setCorrectAns(form.getCorrectAnsField().getText());
-
-		// set the answer one of question object
 		this.question.setAnsOne(form.getAnsOneField().getText());
-
-		// set the answer two of question object
 		this.question.setAnsTwo(form.getAnsTwoField().getText());
-
-		// set the answer three of question object
 		this.question.setAnsThree(form.getAnsThreeField().getText());
 
-		// get the index of question object
 		int index = this.qsList.indexOf(this.question);
 		
 		//format the chosen question to be updated in combo box
@@ -110,7 +97,6 @@ public class EditScene extends BaseScene {
 		// change the text in combo box
 		selectPane.getCombo().getItems().set(index, chosenQuestion);
 		
-		//open alert that tells the user that question is updated
 		Commons.openAlert("Success", "Your question has been modified successfully!", Alert.AlertType.INFORMATION);
 	}
 

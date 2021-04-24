@@ -45,3 +45,11 @@ ICS 108 Project
 
 #### Deleted ID functionalty, done some design, added loading and saving date to QuestionsBank.dat functionalty
 2021, April 22 (Abdulaziz)
+
+
+#### finishing all parts
+2021, April 24 (Yousef)
+
+
+#### Final commit, added UML Diagrams
+2021, April 22 (Abdulaziz)

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -12,10 +10,6 @@ import javafx.scene.text.FontWeight;
 // this pane is used in ViewScene and DeleteScene since both are using the same labels
 public class DisplayPane extends BorderPane implements BasePane{
 	
-	// Passing the question list to the view/delete scenes
-	private ArrayList<Question> qsList;
-	private Question question;
-	
 	// Questions + answers that are going to be shown in the scene
 	private Label questionText;
 	private Label correctAns;
@@ -23,9 +17,7 @@ public class DisplayPane extends BorderPane implements BasePane{
 	private Label ansTwo;
 	private Label ansThree;
 
-	public DisplayPane(ArrayList<Question> qsList) {
-		
-		this.qsList = qsList;	
+	public DisplayPane() {
 		
 		// So, the labels has initialized text to view
 		this.questionText = new Label("");
@@ -48,7 +40,6 @@ public class DisplayPane extends BorderPane implements BasePane{
 		// Changing the font and style for the labels (question + answers)
 		Font fontSize = new Font(Commons.font, 19);
 		
-		
 		this.questionText.setFont   (Font.font(Commons.font, FontWeight.BOLD, 21));
 		this.questionText.setStyle  ("-fx-text-fill: "+ (Commons.darkMode? "#fdfdfd" : "#202020") +";");
 		
@@ -63,9 +54,7 @@ public class DisplayPane extends BorderPane implements BasePane{
 		
 		this.ansThree.setFont       (fontSize);
 		this.ansThree.setStyle      ("-fx-text-fill: "+ (Commons.darkMode? "#fdfdfd" : "#202020") +";");
-		
-		
-		
+			
 		// Answers VBox the
 		VBox answersVB = new VBox(25);
 		answersVB.setPadding(new Insets(0,0,0,25));
@@ -78,9 +67,7 @@ public class DisplayPane extends BorderPane implements BasePane{
 		
 		// this is referring to a (BorderPane)
 		this.setCenter(layoutVB);
-		this.setStyle(Commons.bgSecondary+";" + Commons.innerShadow);
-		
-		
+		this.setStyle(Commons.bgSecondary+";" + Commons.innerShadow);	
 	}
 	
 	public void setDefaultLabels() {
@@ -96,8 +83,6 @@ public class DisplayPane extends BorderPane implements BasePane{
 	// Here the handler works as a setter for the display class ... thats why its public
 	public void handleDisplay(Question question) {
 		
-		// Getting the question object from the combo box
-		this.question = question;
 		if (question == null) {
 			setDefaultLabels();
 		}

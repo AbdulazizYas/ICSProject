@@ -1,15 +1,9 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 // this pane is used in CreateScene and EditScene since both are using TextFields
@@ -23,7 +17,6 @@ public class FormPane extends BorderPane implements BasePane{
 	private TextField ansTwoField;
 	private TextField ansThreeField;
 
-	
 	public FormPane( Button post,Button back) {
 		this.back = back; //the scene has back button from BaseScene, so all scenes uses this pane will pass back button
 		this.post = post;
@@ -46,7 +39,7 @@ public class FormPane extends BorderPane implements BasePane{
 		this.ansTwoField.setPromptText("Type here answer 2 ..");
 		this.ansThreeField.setPromptText("Type here answer 3 ..");
 		
-		//style the fields and make the correct answer field with green shodow
+		//style the fields and make the correct answer field with green shadow
 		this.questionTextField.setStyle(Commons.textField + Commons.shadow);
 		this.correctAnsField.setStyle(Commons.textField +"-fx-effect: dropshadow( three-pass-box , rgba(98, 206, 103, 0.5) , 2, 2.0 , 0 , 1 );");
 		this.ansOneField.setStyle(Commons.textField + Commons.shadow);
@@ -85,7 +78,7 @@ public class FormPane extends BorderPane implements BasePane{
 		this.setBottom(buttonsPane);
 		
 	}
-	//------- getters of each TextFiel ----- ///
+	//------- getters of each TextField ----- ///
 	public TextField getQuestionTextField() {
 		return questionTextField;
 	}

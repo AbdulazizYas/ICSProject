@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
 public class Question implements Serializable {//so that it can be written in .dat file
+	
 	//declare the question text and the correct answer and other 3 answers
 	private String questionText;
 	private String correctAns;

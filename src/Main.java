@@ -5,11 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -29,19 +26,23 @@ public class Main extends Application{
 	//static fields for outside usage
 	public static Stage stage;
 	public static Scene main;
+	
 	// Scenes  static fields
 	public static CreateScene createScene;
 	public static EditScene editScene;
 	public static ViewScene viewScene;
 	public static DeleteScene deleteScene;
+	
 	//buttons for each scene
 	private Button create;
 	private Button edit;
 	private Button view;
 	private Button delete;
+	
 	// Questions list and File object for which questions will be saved in
 	private ArrayList<Question> qsList;
 	private File qsFile = new File("QuestionBank.dat");
+	
 	// Some Main layout's nodes
 	private Label welcome;
 	private Label choose;
@@ -51,7 +52,8 @@ public class Main extends Application{
 	private GridPane buttons;
 	private BorderPane welcomePane;
 	private BorderPane allRightSide;
-	//Custom top bar will be shown only if Commons.customBar is true (which means it is enabeled)
+	
+	//Custom top bar will be shown only if Commons.customBar is true (which means it is enabled)
 	private TopBarPane topBar;
 	
 	@Override
@@ -65,9 +67,9 @@ public class Main extends Application{
 		buttons = new GridPane();
 		allRightSide = new BorderPane();
 		allContent = new HBox();
-		welcome = new Label("Welcome \n to Questions Bank App!");
+		welcome = new Label("Welcome to \n Questioner App! \n\n (Question Bank)");
 		choose = new Label("Choose your action");
-		copyright = new Label("Questioner � Developed by Abdulaziz & Yousef");
+		copyright = new Label("Questioner \u00A9 Developed by Abdulaziz & Yousef");
 		
 		//Initialize Scenes buttons
 		create = new Button("Create");
@@ -102,6 +104,7 @@ public class Main extends Application{
 		}
 		
 		// -------  handle events and create the scenes ---------//
+		
 		//pass the question list to handle the operations
 		createScene = new CreateScene(qsList);
 		editScene = new EditScene(qsList);
@@ -119,27 +122,30 @@ public class Main extends Application{
 		/*-----------  Call the method that design and style the main scene  ---------------*/
 		designLayout();
 	
-		// show the stage
 		stage.show();		
 	
 	}
 	
-	//method for designing and styling the layout
 	public void designLayout() {
+		
 		//design the welcome text message
 		welcome.setTextAlignment(TextAlignment.CENTER);
 		welcome.setTextFill(Color.valueOf("#fefefe"));
 		welcome.setFont(Font.font(Commons.font,FontWeight.BOLD, 35));
 		welcome.setWrapText(true);
+		
 		//design the title above the buttons
 		choose.setAlignment(Pos.CENTER);
 		choose.setTextFill(Color.valueOf("#FFF"));
 		choose.setPadding(new Insets(10,5,10,5));
 		choose.setStyle(Commons.title + Commons.shadow);
+		
 		//style copyright
 		copyright.setStyle("-fx-text-fill: " + Commons.accentColor);
+		
 		//design the left side pane 
 		welcomePane.setStyle(Commons.primaryGradient);
+		
 		//style the right side pane
 		allRightSide.setStyle("-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.25) , 5, 0.0 , 2 , 1 );"
 				                + Commons.bgWhite);
@@ -150,7 +156,6 @@ public class Main extends Application{
 		edit.setStyle(Commons.btn + Commons.bgAccent + "; -fx-font-size: 34; -fx-text-fill:#FFF");	
 	}
 	
-	//for building and structuring the layout and set the widths and heights all nodes
 	public void buildLayout() {
 		//Structure the GridPane for scenes buttons
 		buttons.add(create, 0, 0,2,1);
@@ -160,19 +165,23 @@ public class Main extends Application{
 		buttons.setAlignment(Pos.CENTER);
 		buttons.setVgap(10);
 		buttons.setHgap(10);
+		
 		//to split the appearance into two scenes we divide each side pane by 2 relative to the stage
 		welcomePane.prefWidthProperty().bind(stage.widthProperty().divide(2));
 		allRightSide.prefWidthProperty().bind(stage.widthProperty().divide(2));
+		
 		//set the pref width for each scene button relative to the right side pane
 		create.prefWidthProperty().bind(allRightSide.prefWidthProperty());
 		edit.prefWidthProperty().bind(allRightSide.prefWidthProperty().divide(1.5));// this is smaller than create and view
 		view.prefWidthProperty().bind(allRightSide.prefWidthProperty());
 		delete.prefWidthProperty().bind(allRightSide.prefWidthProperty().divide(1.5));// this is smaller than create and view
+		
 		//set the pref height for each scene button relative to the stage
 		create.prefHeightProperty().bind(stage.heightProperty().divide(6));
 		edit.prefHeightProperty().bind(stage.heightProperty().divide(6));
 		view.prefHeightProperty().bind(stage.heightProperty().divide(6));
 		delete.prefHeightProperty().bind(stage.heightProperty().divide(6));
+		
 		//set the pref width for choose title relative to the right side pane
 		choose.prefWidthProperty().bind(allRightSide.prefWidthProperty().divide(2));
 		
@@ -182,8 +191,10 @@ public class Main extends Application{
 		allRightSide.setBottom(copyright);
 		allRightSide.setPadding(new Insets(15));
 		BorderPane.setAlignment(choose, Pos.CENTER);
+		
 		//set the welcome text message to the center
 		welcomePane.setCenter(welcome);
+		
 		//add all the left side and right side the content pane
 		allContent.getChildren().addAll(welcomePane,allRightSide);
 		allContent.setAlignment(Pos.CENTER);

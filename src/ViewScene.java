@@ -1,13 +1,6 @@
 import java.util.ArrayList;
-
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.Label;
 
 public class ViewScene extends BaseScene{
 	
@@ -17,7 +10,7 @@ public class ViewScene extends BaseScene{
 	
 	public ViewScene(ArrayList<Question> qstList) {
 		
-		this.display = new DisplayPane(qstList);
+		this.display = new DisplayPane();
 		
 		// Changing the title and putting a combo box for the ViewScene
 		this.selectPane = new SelectionPane("View a question");
@@ -26,7 +19,7 @@ public class ViewScene extends BaseScene{
 		selectPane.getCombo().setItems(SelectionPane.getFormattedList(qstList));
 		
 		// Handle the selection of combo box in view scene with handleDisplay located in DisplayPane
-		selectPane.getCombo().setOnAction(e -> this.display.handleDisplay(Main.viewScene.getSelectPane().getQuestion(qstList)));
+		selectPane.getCombo().setOnAction(e -> this.display.handleDisplay(this.selectPane.getQuestion(qstList)));
 		
 		
 		build();
@@ -54,8 +47,5 @@ public class ViewScene extends BaseScene{
 		return this.selectPane;
 	}
 	
-	/*public DisplayPane getDisplayPane() {
-		return this.display;
-	}*/
 }
 

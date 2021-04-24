@@ -1,17 +1,7 @@
-import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 // this class is used to be inherited by the scenes
 //it gives the root pane, which is BorderPane, and back button to its subclasses
@@ -31,11 +21,12 @@ public abstract class BaseScene extends Scene {
 		back.setPadding(new Insets(10));
 		back.prefWidthProperty().bind(Main.stage.widthProperty().divide(10));
 	}
+	
 	//define method that must be used by subclasses 
 	protected abstract void build();
 
 }
-//interface for TopBarPane and SelectionPane and FormPane
+//interface for TopBarPane and FormPane
 interface BasePane {
 	void buildPane();
 }

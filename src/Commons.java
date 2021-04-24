@@ -32,6 +32,7 @@ public class Commons {
 		 alert.showAndWait();
 	}
 	
+	//method for update all combo boxes in all scenes
 	public static void updateAllCombos(ArrayList<Question> qsList) {
 		Main.editScene.getSelectPane().getCombo().setItems(SelectionPane.getFormattedList(qsList));
 		Main.viewScene.getSelectPane().getCombo().setItems(SelectionPane.getFormattedList(qsList));

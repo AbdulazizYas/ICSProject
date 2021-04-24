@@ -1,14 +1,10 @@
 import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 public class CreateScene extends BaseScene {
@@ -63,12 +59,14 @@ public class CreateScene extends BaseScene {
 	}
 	
 	private void handleCreating() {
+		
 		// to check if all fields is not empty
 		if (this.form.isFieldsEmpty()) {
 			Commons.openAlert("Empty fields", "You must fill all the fields to create your question",
 					Alert.AlertType.WARNING);
-			return; //stop executing the method
+			return; 
 		}
+		
 		// if they are not empty then create a question object and add it to the question list
 		Question q = new Question( this.form.getQuestionTextField().getText(), this.form.getCorrectAnsField().getText(),
 				this.form.getAnsOneField().getText(), this.form.getAnsTwoField().getText(),
@@ -78,8 +76,9 @@ public class CreateScene extends BaseScene {
 		
 		//if the question is created then update the combo box of each scene by the method getFormattedList
 		Commons.updateAllCombos(qsList);
-		//open alert that tells the user that question is created
+		
 		Commons.openAlert("Success", "Your question has been created successfully!", Alert.AlertType.INFORMATION);
+		
 		//empty all fields after creating question
 		this.form.getQuestionTextField().setText("");
 		this.form.getCorrectAnsField().setText("");

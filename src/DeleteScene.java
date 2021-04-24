@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Optional;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -9,8 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 
 
-public class DeleteScene extends BaseScene{
-	
+public class DeleteScene extends BaseScene{	
 	
 	private SelectionPane selectPane;
 	private DisplayPane display;
@@ -21,19 +19,18 @@ public class DeleteScene extends BaseScene{
 	
 	public DeleteScene(ArrayList<Question> qstList) {
 		
+		this.qstList = qstList;
 		
-		this.display = new DisplayPane(qstList);
+		this.display = new DisplayPane();
 		
-		// Changing the title and putting a combo box for the ViewScene
+		// Changing the title and putting a combo box for the DeleteScene
 		this.selectPane = new SelectionPane("Delete a question");
 
 		// Set the items of combo box with the question list when the DeleteScene is created
 		this.selectPane.getCombo().setItems(SelectionPane.getFormattedList(qstList));
 		
 		// Handle the selection of combo box in view scene with handleDisplay located in DisplayPane
-		this.selectPane.getCombo().setOnAction(e -> this.display.handleDisplay(Main.deleteScene.getSelectPane().getQuestion(this.qstList)));
-		
-		this.qstList = qstList;
+		this.selectPane.getCombo().setOnAction(e -> this.display.handleDisplay(this.selectPane.getQuestion(this.qstList)));
 		
 		this.delete = new Button("Delete");
 		this.delete.setOnAction(e -> handleDelete());
@@ -67,7 +64,7 @@ public class DeleteScene extends BaseScene{
 	
 	private void handleDelete() {
 		// Getting the question from the ComboBox
-		Question q = Main.deleteScene.getSelectPane().getQuestion(this.qstList);
+		Question q = this.selectPane.getQuestion(this.qstList);
 		
 		if (q != null) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -93,17 +90,11 @@ public class DeleteScene extends BaseScene{
 			// An alert if the user didn't choose a question to delete
 			Commons.openAlert("Failed to delete", "Please choose or create a question to delete!", Alert.AlertType.INFORMATION);
 		}
-		
-		
-		
+	
 	}
 	
 	public SelectionPane getSelectPane() {
 		return this.selectPane;
 	}
-	
-	/*public DisplayPane getDisplayPane() {
-		return this.display;
-	}*/
 }
 
